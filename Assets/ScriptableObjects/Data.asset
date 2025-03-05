@@ -28,4 +28,9 @@ MonoBehaviour:
     words:
     - 1
     - 2
-  currentLevelIndex: 1
+  - questionSprite: {fileID: 7880189758424871971, guid: 9e837ef28dd697740af33cff09a8020b, type: 3}
+    wrongAnswerSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    wordCount: 1
+    words:
+    - 1
+  currentLevelIndex: 2

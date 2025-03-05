@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class OptionButton : MonoBehaviour
 {
     public Text wordText;         // UI Text to display the word.
-    public Text indexText;         // UI Text to display the index.
+    public Text indexText;        // UI Text to display the index.
     public int currentIndex = 0;  // Order of selection.
     private string originalWord;
     private OptionsPlacing manager;

@@ -12,7 +12,7 @@ public class OptionsPlacing : MonoBehaviour
     private Data dataAsset;
     public GameObject optionPrefab;       // Prefab for an option button (must have OptionButton component)
     public Transform optionContainer;     // Parent container (e.g., with a Vertical Layout Group)
-    public GameObject questionImage;           // Image to display the question (and wrong answer feedback)
+    public GameObject questionImage;      // Image to display the question (and wrong answer feedback)
     private const string dataAssetPath = "Assets/ScriptableObjects/Data.asset";
     public UnityEngine.UI.Text CurrentLevel;
     public UnityEngine.UI.Text lastLevel;
