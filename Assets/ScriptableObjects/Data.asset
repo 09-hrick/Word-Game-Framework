@@ -18,7 +18,7 @@ MonoBehaviour:
     wordCount: 5
     words:
     - The
-    - Cat
+    - Man
     - Sleeps
     - All
     - Day
@@ -63,15 +63,6 @@ MonoBehaviour:
     - Always
     - Forgets
     - Keys
-  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
-    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 5
-    words:
-    - She
-    - Smiled
-    - Smiled
-    - Despite
-    - The pain
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
     wordCount: 5
