@@ -177,9 +177,9 @@ public class OptionsPlacing : MonoBehaviour
             return;
         }
 
-        // Build the user's answer list based on the selection order
         List<string> userOrder = new List<string>();
         selectedButtons.Sort((a, b) => a.currentIndex.CompareTo(b.currentIndex));
+
         foreach (OptionButton btn in selectedButtons)
         {
             // Assumes each button has a Text component showing the word
@@ -189,23 +189,13 @@ public class OptionsPlacing : MonoBehaviour
         // Get the correct answer order from the Data asset
         List<string> correctOrder = dataAsset.Levels[dataAsset.currentLevelIndex].words;
 
-        // Compare the user's order to the correct order
-        bool isCorrect = true;
-        if (userOrder.Count != correctOrder.Count)
-        {
-            isCorrect = false;
-        }
-        else
-        {
-            for (int i = 0; i < userOrder.Count; i++)
-            {
-                if (userOrder[i] != correctOrder[i])
-                {
-                    isCorrect = false;
-                    break;
-                }
-            }
-        }
+        // Convert both lists to space-separated strings
+        string userSentence = string.Join(" ", userOrder);
+        string correctSentence = string.Join(" ", correctOrder);
+
+        // Compare sentences directly
+        bool isCorrect = userSentence == correctSentence;
+
 
         // If the answer is correct, move to the next level; otherwise, show feedback
         if (isCorrect)
