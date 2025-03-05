@@ -43,6 +43,10 @@ Below is the demo video for the Quiz Editor Window.
 
 Watch the video on [YouTube](https://youtu.be/a3oLsd-d34U?si=JrW2WgoktC2IA_nJ).
 
+## Android Build
+
+[Android Build Link](https://github.com/09-hrick/Word-Game-Framework/releases/tag/Android).
+
 ## Live Demo
 
 [Demo link](https://09hrick.itch.io/word-game-framework).
