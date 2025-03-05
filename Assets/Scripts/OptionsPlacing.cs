@@ -3,9 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class OptionsPlacing : MonoBehaviour
 {
@@ -22,7 +19,7 @@ public class OptionsPlacing : MonoBehaviour
     public GameObject questionImage;
 
     // Path to the Data asset in the project
-    private const string dataAssetPath = "Assets/ScriptableObjects/Data.asset";
+    private const string dataAssetPath = "Assets/Resources/Data.asset";
 
     // UI elements for showing current and last level information
     public UnityEngine.UI.Text CurrentLevel;
@@ -37,14 +34,9 @@ public class OptionsPlacing : MonoBehaviour
     // List to keep track of the option buttons in the order they are clicked
     private List<OptionButton> selectedButtons = new List<OptionButton>();
 
-    public void Start()
+    public void Awake()
     {
-        // Create a local list to hold the words for the current level
-        List<string> words = new List<string>();
-
-#if UNITY_EDITOR
-        // Load the Data asset from the editor folder
-        dataAsset = AssetDatabase.LoadAssetAtPath<Data>(dataAssetPath);
+        dataAsset = Resources.Load<Data>("Data");
         if (dataAsset != null)
         {
             // Set the starting level and update UI text for the final level count
@@ -60,10 +52,15 @@ public class OptionsPlacing : MonoBehaviour
             Debug.LogWarning("Data asset not found.");
             return;
         }
-#else
-        Debug.LogError("AssetDatabase is only available in the Editor. Use Resources.Load for runtime.");
-        return;
-#endif
+    }
+    public void Start()
+    {
+        // Create a local list to hold the words for the current level
+        List<string> words = new List<string>();
+
+
+       
+
 
         textWarning.text = "";
 

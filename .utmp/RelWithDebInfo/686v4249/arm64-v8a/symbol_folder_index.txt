@@ -1,0 +1,1 @@
+D:\unity projects\Word Game Framework\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\686v4249\obj\arm64-v8a

@@ -7,7 +7,7 @@ public class QuizEditorWindow : EditorWindow
 {
     private Data dataAsset; // Our ScriptableObject that holds quiz data
     private Vector2 scrollPos; // For scrolling through levels in the window
-    private const string dataAssetPath = "Assets/ScriptableObjects/Data.asset";
+    private const string dataAssetPath = "Assets/Resources/Data.asset";
 
     [MenuItem("Window/Quiz Editor")]
     public static void ShowWindow()
@@ -18,13 +18,13 @@ public class QuizEditorWindow : EditorWindow
 
     private void OnEnable()
     {
-        const string folderPath = "Assets/ScriptableObjects";
+        const string folderPath = "Assets/Resources";
         const string dataAssetPath = folderPath + "/Data.asset";
 
         // Check if the folder exists, and create it if needed.
         if (!AssetDatabase.IsValidFolder(folderPath))
         {
-            AssetDatabase.CreateFolder("Assets", "ScriptableObjects");
+            AssetDatabase.CreateFolder("Assets", "Resources");
             Debug.Log("Created folder: " + folderPath);
         }
 
