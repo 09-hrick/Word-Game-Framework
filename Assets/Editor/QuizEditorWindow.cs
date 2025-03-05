@@ -84,8 +84,21 @@ public class QuizEditorWindow : EditorWindow
         for (int i = 0; i < levels.Count; i++)
         {
             EditorGUILayout.BeginVertical("box");
+            // Create a horizontal layout for the header and delete button.
+            EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Level " + (i + 1), EditorStyles.boldLabel);
-
+            if (GUILayout.Button("Delete Level", GUILayout.Width(100)))
+            {
+                // Confirm deletion.
+                if (EditorUtility.DisplayDialog("Delete Level", "Are you sure you want to delete Level " + (i + 1) + "?", "Yes", "No"))
+                {
+                    levels.RemoveAt(i);
+                    EditorUtility.SetDirty(dataAsset);
+                    // Exit the loop to avoid errors due to the modified list.
+                    break;
+                }
+            }
+            EditorGUILayout.EndHorizontal();
             Level currentLevel = levels[i];
 
             // Fields to set the sprites for this level.
