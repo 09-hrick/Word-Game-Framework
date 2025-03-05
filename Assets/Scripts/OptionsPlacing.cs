@@ -9,52 +9,70 @@ using UnityEditor;
 
 public class OptionsPlacing : MonoBehaviour
 {
+    // Reference to the Data asset that stores our quiz info
     private Data dataAsset;
-    public GameObject optionPrefab;       // Prefab for an option button (must have OptionButton component)
-    public Transform optionContainer;     // Parent container (e.g., with a Vertical Layout Group)
-    public GameObject questionImage;      // Image to display the question (and wrong answer feedback)
+
+    // Prefab for an option button (should have the OptionButton component)
+    public GameObject optionPrefab;
+
+    // Container where the option buttons will be placed (like a vertical list)
+    public Transform optionContainer;
+
+    // GameObject holding the question image (also used for wrong answer feedback)
+    public GameObject questionImage;
+
+    // Path to the Data asset in the project
     private const string dataAssetPath = "Assets/ScriptableObjects/Data.asset";
+
+    // UI elements for showing current and last level information
     public UnityEngine.UI.Text CurrentLevel;
     public UnityEngine.UI.Text lastLevel;
+
+    // Progress bar object to show quiz progress
     public GameObject progressBar;
+
+    // Warning text to display messages to the user
     public UnityEngine.UI.Text textWarning;
 
-
-    // List to track the order in which option buttons are clicked (their selection order).
+    // List to keep track of the option buttons in the order they are clicked
     private List<OptionButton> selectedButtons = new List<OptionButton>();
 
     public void Start()
     {
-        // Local copy for the words.
+        // Create a local list to hold the words for the current level
         List<string> words = new List<string>();
 
 #if UNITY_EDITOR
-    // Load the Data asset first.
-    dataAsset = AssetDatabase.LoadAssetAtPath<Data>(dataAssetPath);
-    if (dataAsset != null)
-    {
-        // Now that dataAsset is loaded, set the current level.
-        dataAsset.currentLevelIndex = 0;
-        lastLevel.text = "Level " + dataAsset.Levels.Count.ToString();    
-        UnityEngine.UI.Image imgProgressBar = progressBar.GetComponent<UnityEngine.UI.Image>();
-        imgProgressBar.fillAmount= 0;
-    }
-    else
-    {
-        Debug.LogWarning("Data asset not found.");
-        return;
-    }
+        // Load the Data asset from the editor folder
+        dataAsset = AssetDatabase.LoadAssetAtPath<Data>(dataAssetPath);
+        if (dataAsset != null)
+        {
+            // Set the starting level and update UI text for the final level count
+            dataAsset.currentLevelIndex = 0;
+            lastLevel.text = "Level " + dataAsset.Levels.Count.ToString();
+
+            // Initialize the progress bar (fill amount starts at 0)
+            UnityEngine.UI.Image imgProgressBar = progressBar.GetComponent<UnityEngine.UI.Image>();
+            imgProgressBar.fillAmount = 0;
+        }
+        else
+        {
+            Debug.LogWarning("Data asset not found.");
+            return;
+        }
 #else
         Debug.LogError("AssetDatabase is only available in the Editor. Use Resources.Load for runtime.");
         return;
 #endif
+
         textWarning.text = "";
 
-        // If the data asset was successfully loaded, create a local copy of the words for the desired level.
+        // If the data asset and level data are valid, copy the words for the current level
         if (dataAsset != null && dataAsset.Levels != null && dataAsset.Levels.Count > dataAsset.currentLevelIndex)
         {
             words = new List<string>(dataAsset.Levels[dataAsset.currentLevelIndex].words);
-            // Set the question image to the correct question sprite.
+
+            // Set the question image to the level's question sprite
             if (questionImage != null)
             {
                 UnityEngine.UI.Image img = questionImage.GetComponent<UnityEngine.UI.Image>();
@@ -69,13 +87,14 @@ public class OptionsPlacing : MonoBehaviour
             Debug.LogWarning("Data asset not found or level data is missing.");
         }
 
-        // Randomize the local copy without modifying the original asset data.
+        // Shuffle the words list without affecting the original asset
         RandomizeList(words);
 
+        // Create option buttons using the randomized list
         CreateButtons(words);
     }
 
-    // Generic helper function to randomize a list using Fisher–Yates shuffle.
+    // Shuffles a list in place using the Fisher–Yates algorithm
     private void RandomizeList<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -87,30 +106,31 @@ public class OptionsPlacing : MonoBehaviour
         }
     }
 
+    // Creates a button for each word in the list
     public void CreateButtons(List<string> words)
     {
-        // Remove existing option buttons.
+        // Remove any existing buttons from the container
         foreach (Transform child in optionContainer)
         {
             Destroy(child.gameObject);
         }
         selectedButtons.Clear();
 
-        // Instantiate an option button for each word.
+        // Create a new button for each word
         foreach (string word in words)
         {
             GameObject newButton = Instantiate(optionPrefab, optionContainer);
             OptionButton optionBtn = newButton.GetComponent<OptionButton>();
             if (optionBtn != null)
             {
-                // Initialize the button with this manager and the word.
+                // Initialize the button with this manager and the word text
                 optionBtn.Initialize(this, word);
             }
             else
             {
                 Debug.LogWarning("OptionButton component missing on prefab.");
             }
-            // Hook up the button click event if a Button component exists.
+            // Set up the click event for the button if it has a Button component
             UnityEngine.UI.Button btn = newButton.GetComponent<UnityEngine.UI.Button>();
             if (btn != null && optionBtn != null)
             {
@@ -120,12 +140,10 @@ public class OptionsPlacing : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Called by an OptionButton when it is clicked.
-    /// </summary>
+    // Called by an OptionButton when clicked to track selection order
     public void HandleOptionButtonClick(OptionButton btn)
     {
-        // If the button hasn't been selected yet (index is 0)
+        // If the button hasn't been selected yet (its index is 0)
         if (btn.currentIndex == 0)
         {
             selectedButtons.Add(btn);
@@ -133,11 +151,10 @@ public class OptionsPlacing : MonoBehaviour
         }
         else
         {
-            // If the button is already selected,
-            // remove it from its current position and add it at the end.
+            // If already selected, remove and re-add it to update its position
             selectedButtons.Remove(btn);
             selectedButtons.Add(btn);
-            // Update indices for all selected buttons.
+            // Update indices for all selected buttons
             for (int i = 0; i < selectedButtons.Count; i++)
             {
                 selectedButtons[i].SetIndex(i + 1);
@@ -145,14 +162,12 @@ public class OptionsPlacing : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Called when the Submit button is clicked.
-    /// Checks if all options have been selected, then compares the order.
-    /// </summary>
+    // Called when the Submit button is clicked
     public void SubmitAnswer()
     {
         Debug.Log("User pressed Submit button");
-        // Ensure all option buttons are selected.
+
+        // Check if all option buttons have been selected
         int totalOptions = optionContainer.childCount;
         if (selectedButtons.Count < totalOptions)
         {
@@ -162,20 +177,19 @@ public class OptionsPlacing : MonoBehaviour
             return;
         }
 
-        // Build the user answer list (sorted by the order assigned to each button).
+        // Build the user's answer list based on the selection order
         List<string> userOrder = new List<string>();
-        // It's a good idea to sort the selectedButtons by their current index.
         selectedButtons.Sort((a, b) => a.currentIndex.CompareTo(b.currentIndex));
         foreach (OptionButton btn in selectedButtons)
         {
-            // Assuming the OptionButton stores the displayed word in its child Text (wordText).
+            // Assumes each button has a Text component showing the word
             userOrder.Add(btn.wordText.text);
         }
 
-        // Get the correct answer order from the Data asset.
+        // Get the correct answer order from the Data asset
         List<string> correctOrder = dataAsset.Levels[dataAsset.currentLevelIndex].words;
 
-        // Compare user order with the correct order.
+        // Compare the user's order to the correct order
         bool isCorrect = true;
         if (userOrder.Count != correctOrder.Count)
         {
@@ -193,6 +207,7 @@ public class OptionsPlacing : MonoBehaviour
             }
         }
 
+        // If the answer is correct, move to the next level; otherwise, show feedback
         if (isCorrect)
         {
             Debug.Log("Correct answer! Moving to next level...");
@@ -205,25 +220,17 @@ public class OptionsPlacing : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Called when the Reset button is clicked.
-    /// Resets all option button indices.
-    /// </summary>
+    // Called when the Reset button is pressed to clear current selections
     public void ResetAnswer()
     {
         Debug.Log("User pressed Reset Button");
-        // Clear the current selections.
         selectedButtons.Clear();
 
-        // Get the words for the current level.
+        // Get the words for the current level and randomize them
         if (dataAsset != null && dataAsset.Levels != null && dataAsset.Levels.Count > dataAsset.currentLevelIndex)
         {
             List<string> words = new List<string>(dataAsset.Levels[dataAsset.currentLevelIndex].words);
-
-            // Randomize the words.
             RandomizeList(words);
-
-            // Re-create the option buttons with the new randomized order.
             CreateButtons(words);
         }
         else
@@ -232,30 +239,29 @@ public class OptionsPlacing : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Advances to the next level.
-    /// Updates the question image and recreates the option buttons.
-    /// </summary>
+    // Advances to the next level by updating the UI and reloading buttons
     private void MoveToNextLevel()
     {
-        // Increment the level index (ensure you don't go out-of-range).
         if (dataAsset != null && dataAsset.Levels != null)
         {
+            // Update the progress bar fill amount based on level progress
             UnityEngine.UI.Image imgProgressBar = progressBar.GetComponent<UnityEngine.UI.Image>();
-            imgProgressBar.fillAmount = (float)(dataAsset.currentLevelIndex+1) / dataAsset.Levels.Count;
+            imgProgressBar.fillAmount = (float)(dataAsset.currentLevelIndex + 1) / dataAsset.Levels.Count;
             Debug.Log("Fill amount " + imgProgressBar.fillAmount);
+
             if (dataAsset.currentLevelIndex < dataAsset.Levels.Count - 1)
             {
                 dataAsset.currentLevelIndex++;
-                CurrentLevel.text = "Level " + (dataAsset.currentLevelIndex+1).ToString();
-                // Update question image.
+                CurrentLevel.text = "Level " + (dataAsset.currentLevelIndex + 1).ToString();
+
+                // Update the question image for the new level
                 if (questionImage != null)
                 {
                     UnityEngine.UI.Image img = questionImage.GetComponent<UnityEngine.UI.Image>();
                     if (img != null)
                         img.sprite = dataAsset.Levels[dataAsset.currentLevelIndex].questionSprite;
                 }
-                // Re-create buttons with the new level's words.
+                // Create new option buttons for the next level
                 List<string> words = new List<string>(dataAsset.Levels[dataAsset.currentLevelIndex].words);
                 RandomizeList(words);
                 CreateButtons(words);
@@ -263,18 +269,15 @@ public class OptionsPlacing : MonoBehaviour
             else
             {
                 Debug.Log("Quiz complete!");
-                // Show dialog and then exit.
                 ShowQuizCompleteDialog();
             }
         }
     }
 
-    /// <summary>
-    /// Shows the wrong answer sprite for 5 seconds, then reverts back and resets the selection.
-    /// </summary>
+    // Shows the wrong answer sprite for a few seconds before resetting the selection
     private IEnumerator WrongAnswerSequence()
     {
-        // Change the question image to the wrong answer sprite.
+        // Change the question image to the wrong answer sprite
         if (questionImage != null)
         {
             UnityEngine.UI.Image img = questionImage.GetComponent<UnityEngine.UI.Image>();
@@ -284,7 +287,7 @@ public class OptionsPlacing : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
-        // Revert back to the correct question sprite.
+        // Revert the image back to the correct question sprite
         if (questionImage != null)
         {
             UnityEngine.UI.Image img = questionImage.GetComponent<UnityEngine.UI.Image>();
@@ -292,19 +295,18 @@ public class OptionsPlacing : MonoBehaviour
                 img.sprite = dataAsset.Levels[dataAsset.currentLevelIndex].questionSprite;
         }
 
-        // Reset the selected options.
+        // Reset the option selections after showing feedback
         ResetAnswer();
     }
-    /// <summary>
-    /// Displays a dialog box indicating the quiz is complete and exits the game.
-    /// </summary>
+
+    // Shows a dialog indicating the quiz is complete and quits the application
     private void ShowQuizCompleteDialog()
     {
         Debug.Log("Quiz complete! Exiting game...");
         Application.Quit();
     }
 
-    //Delay of delay seconds
+    // Clears the warning text after a short delay
     private IEnumerator ClearWarningAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);

@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class QuizEditorWindow : EditorWindow
 {
-    private Data dataAsset; // Reference to ScriptableObject
-    private Vector2 scrollPos;
+    private Data dataAsset; // Our ScriptableObject that holds quiz data
+    private Vector2 scrollPos; // For scrolling through levels in the window
     private const string dataAssetPath = "Assets/ScriptableObjects/Data.asset";
 
     [MenuItem("Window/Quiz Editor")]
     public static void ShowWindow()
     {
+        // Open the Quiz Editor window
         GetWindow<QuizEditorWindow>("Quiz Editor");
     }
 
@@ -20,17 +21,17 @@ public class QuizEditorWindow : EditorWindow
         const string folderPath = "Assets/ScriptableObjects";
         const string dataAssetPath = folderPath + "/Data.asset";
 
-        // Check if the folder exists. If not, create it.
+        // Check if the folder exists, and create it if needed.
         if (!AssetDatabase.IsValidFolder(folderPath))
         {
             AssetDatabase.CreateFolder("Assets", "ScriptableObjects");
             Debug.Log("Created folder: " + folderPath);
         }
 
-        // Try to load the asset from the specified path.
+        // Try to load the Data asset from the folder.
         dataAsset = AssetDatabase.LoadAssetAtPath<Data>(dataAssetPath);
 
-        // If not found, create a new asset.
+        // If it doesn't exist, create a new Data asset.
         if (dataAsset == null)
         {
             dataAsset = ScriptableObject.CreateInstance<Data>();
@@ -40,27 +41,28 @@ public class QuizEditorWindow : EditorWindow
         }
     }
 
-
     private void OnGUI()
     {
         GUILayout.Label("Quiz Editor", EditorStyles.boldLabel);
 
+        // If the asset isn't loaded, show a warning.
         if (dataAsset == null)
         {
             EditorGUILayout.HelpBox("Data asset not found or not loaded.", MessageType.Warning);
             return;
         }
 
-        // Access the levels list from your Data asset.
-        List<Level> levels = dataAsset.Levels; // Make sure Levels is public or has a public property
+        // Get the list of levels from the Data asset.
+        List<Level> levels = dataAsset.Levels;
 
-        // Input for the number of levels.
+        // Let the user set how many levels there should be.
         int currentLevelCount = levels.Count;
         int newLevelCount = EditorGUILayout.IntField("Number of Levels", currentLevelCount);
         if (newLevelCount != currentLevelCount)
         {
             if (newLevelCount > currentLevelCount)
             {
+                // Add new level entries as needed.
                 while (newLevelCount > levels.Count)
                 {
                     levels.Add(new Level());
@@ -68,14 +70,16 @@ public class QuizEditorWindow : EditorWindow
             }
             else
             {
+                // Remove levels until the count matches.
                 while (newLevelCount < levels.Count)
                 {
                     levels.RemoveAt(levels.Count - 1);
                 }
             }
-            EditorUtility.SetDirty(dataAsset);
+            EditorUtility.SetDirty(dataAsset); // Mark asset as changed.
         }
 
+        // Create a scrollable area for level details.
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         for (int i = 0; i < levels.Count; i++)
         {
@@ -84,11 +88,11 @@ public class QuizEditorWindow : EditorWindow
 
             Level currentLevel = levels[i];
 
-            // Object field for the question sprite.
+            // Fields to set the sprites for this level.
             currentLevel.questionSprite = (Sprite)EditorGUILayout.ObjectField("Question Sprite:", currentLevel.questionSprite, typeof(Sprite), false);
             currentLevel.wrongAnswerSprite = (Sprite)EditorGUILayout.ObjectField("Wrong Answer Sprite:", currentLevel.wrongAnswerSprite, typeof(Sprite), false);
 
-            // Input for the number of words for this level.
+            // Let the user define how many words are in this level.
             int newWordCount = EditorGUILayout.IntField("Number of Words", currentLevel.wordCount);
             if (newWordCount > 5)
             {
@@ -100,7 +104,7 @@ public class QuizEditorWindow : EditorWindow
             if (newWordCount != currentLevel.wordCount)
             {
                 currentLevel.wordCount = newWordCount;
-                // Adjust the words list to match the word count.
+                // Adjust the words list to match the new count.
                 if (newWordCount > currentLevel.words.Count)
                 {
                     while (newWordCount > currentLevel.words.Count)
@@ -118,7 +122,7 @@ public class QuizEditorWindow : EditorWindow
                 EditorUtility.SetDirty(dataAsset);
             }
 
-            // Display text fields for each word.
+            // Create text fields for each word.
             for (int j = 0; j < currentLevel.words.Count; j++)
             {
                 currentLevel.words[j] = EditorGUILayout.TextField("Word " + (j + 1), currentLevel.words[j]);
@@ -129,6 +133,7 @@ public class QuizEditorWindow : EditorWindow
         }
         EditorGUILayout.EndScrollView();
 
+        // Mark the asset dirty if any changes occurred.
         if (GUI.changed)
         {
             EditorUtility.SetDirty(dataAsset);

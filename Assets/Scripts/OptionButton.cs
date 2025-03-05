@@ -3,15 +3,24 @@ using UnityEngine.UI;
 
 public class OptionButton : MonoBehaviour
 {
-    public Text wordText;         // UI Text to display the word.
-    public Text indexText;        // UI Text to display the index.
-    public int currentIndex = 0;  // Order of selection.
+    // Displays the word on the button.
+    public Text wordText;
+
+    // Shows the selection order for this button.
+    public Text indexText;
+
+    // Keeps track of the button's selection order (0 means not yet selected).
+    public int currentIndex = 0;
+
+    // Stores the original word for this button.
     private string originalWord;
+
+    // Reference to the manager that handles option buttons.
     private OptionsPlacing manager;
-    
+
     private void Awake()
     {
-        // Auto-assign if not set in the Inspector.
+        // If the wordText hasn't been set in the Inspector, try to auto-assign it.
         if (wordText == null)
         {
             wordText = GetComponentInChildren<Text>();
@@ -20,7 +29,7 @@ public class OptionButton : MonoBehaviour
         }
     }
 
-    // Initializes the button with its word and a reference to the manager.
+    // Sets up the button with the given word and a reference to its manager.
     public void Initialize(OptionsPlacing optionsManager, string word)
     {
         manager = optionsManager;
@@ -30,7 +39,7 @@ public class OptionButton : MonoBehaviour
         currentIndex = 0;
     }
 
-    // Called when the button is clicked.
+    // Triggered when the button is clicked.
     public void OnButtonClicked()
     {
         Debug.Log("Button clicked: " + originalWord);
@@ -38,13 +47,13 @@ public class OptionButton : MonoBehaviour
             manager.HandleOptionButtonClick(this);
     }
 
-    // Updates the button's index and reflects it in the UI text.
+    // Updates the button's selection order and displays it in the UI.
     public void SetIndex(int index)
     {
         currentIndex = index;
         if (wordText != null)
         {
-            // Update the text to show the index number.
+            // Display the new index on the button.
             indexText.text = currentIndex.ToString();
         }
         else
