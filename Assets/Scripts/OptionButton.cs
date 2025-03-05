@@ -10,7 +10,7 @@ public class OptionButton : MonoBehaviour
     public Text indexText;
 
     // Keeps track of the button's selection order (0 means not yet selected).
-    public int currentIndex = 0;
+    public int currentIndex;
 
     // Stores the original word for this button.
     private string originalWord;
