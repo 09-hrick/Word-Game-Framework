@@ -39,8 +39,6 @@ This Unity Editor extension provides a custom window for managing quiz levels. I
 
 ## Demo Video
 
-Below is the embedded demo video for the Quiz Editor Window. It will play directly within the Markdown file if your viewer supports HTML:
+Below is the demo video for the Quiz Editor Window.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/a3oLsd-d34U?si=nbKskCSToum7WFqH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-Alternatively, you can watch the video on [YouTube](https://youtu.be/a3oLsd-d34U?si=JrW2WgoktC2IA_nJ).
+Watch the video on [YouTube](https://youtu.be/a3oLsd-d34U?si=JrW2WgoktC2IA_nJ).
