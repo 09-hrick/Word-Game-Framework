@@ -17,6 +17,8 @@ public class OptionsPlacing : MonoBehaviour
     public UnityEngine.UI.Text CurrentLevel;
     public UnityEngine.UI.Text lastLevel;
     public GameObject progressBar;
+    public UnityEngine.UI.Text textWarning;
+
 
     // List to track the order in which option buttons are clicked (their selection order).
     private List<OptionButton> selectedButtons = new List<OptionButton>();
@@ -46,6 +48,7 @@ public class OptionsPlacing : MonoBehaviour
         Debug.LogError("AssetDatabase is only available in the Editor. Use Resources.Load for runtime.");
         return;
 #endif
+        textWarning.text = "";
 
         // If the data asset was successfully loaded, create a local copy of the words for the desired level.
         if (dataAsset != null && dataAsset.Levels != null && dataAsset.Levels.Count > dataAsset.currentLevelIndex)
@@ -154,7 +157,8 @@ public class OptionsPlacing : MonoBehaviour
         if (selectedButtons.Count < totalOptions)
         {
             Debug.Log("Please select all words.");
-            // Optionally, display a UI message here.
+            textWarning.text = "Please select all words before Submitting";
+            StartCoroutine(ClearWarningAfterDelay(3f));
             return;
         }
 
@@ -298,5 +302,12 @@ public class OptionsPlacing : MonoBehaviour
     {
         Debug.Log("Quiz complete! Exiting game...");
         Application.Quit();
+    }
+
+    //Delay of delay seconds
+    private IEnumerator ClearWarningAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        textWarning.text = "";
     }
 }
