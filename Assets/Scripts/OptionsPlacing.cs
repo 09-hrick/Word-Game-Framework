@@ -303,6 +303,8 @@ public class OptionsPlacing : MonoBehaviour
     private void ShowQuizCompleteDialog()
     {
         Debug.Log("Quiz complete! Exiting game...");
+        textWarning.text = "Congratulations You Won!!!";
+        StartCoroutine(ClearWarningAfterDelay(3f));
         Application.Quit();
     }
 
