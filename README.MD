@@ -4,8 +4,7 @@ This Unity Editor extension provides a custom window for managing quiz levels. I
 
 ## Live Demo
 
-Try the live demo:  
-[Demo Link](https://09hrick.itch.io/word-game-framework)
+Try the live demo:  [Demo Link](https://09hrick.itch.io/word-game-framework)
 
 ## Features
 
