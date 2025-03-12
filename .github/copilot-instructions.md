@@ -2,7 +2,7 @@
 - Project name: Word Game Framework
 - Unity version: Unity 6000.0.26f1
 - Active game object:
-  - Name: Option (4)
+  - Name: Option
   - Tag: Untagged
   - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
