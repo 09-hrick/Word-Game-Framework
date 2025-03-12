@@ -2,6 +2,11 @@
 
 This Unity Editor extension provides a custom window for managing quiz levels. It enables users to create, modify, and delete quiz levels, assign sprites for questions and wrong answers, and define words per level. Quiz data is stored and persisted using a ScriptableObject.
 
+## Live Demo
+
+Try the live demo:  
+[Demo Link](https://09hrick.itch.io/word-game-framework)
+
 ## Features
 
 - **Dynamic Level Management:**  
@@ -48,7 +53,4 @@ Watch the demo video showcasing the Quiz Editor Window:
 Download the Android build here:  
 [Android Build Link](https://github.com/09-hrick/Word-Game-Framework/releases/tag/Android)
 
-## Live Demo
 
-Try the live demo:  
-[Demo Link](https://09hrick.itch.io/word-game-framework)
