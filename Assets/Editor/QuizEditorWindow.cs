@@ -79,11 +79,15 @@ public class QuizEditorWindow : EditorWindow
             EditorUtility.SetDirty(dataAsset); // Mark asset as changed.
         }
 
+        // We'll use this variable to mark a level for deletion
+        int deletionIndex = -1;
+
         // Create a scrollable area for level details.
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         for (int i = 0; i < levels.Count; i++)
         {
             EditorGUILayout.BeginVertical("box");
+
             // Create a horizontal layout for the header and delete button.
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Level " + (i + 1), EditorStyles.boldLabel);
@@ -92,59 +96,68 @@ public class QuizEditorWindow : EditorWindow
                 // Confirm deletion.
                 if (EditorUtility.DisplayDialog("Delete Level", "Are you sure you want to delete Level " + (i + 1) + "?", "Yes", "No"))
                 {
-                    levels.RemoveAt(i);
-                    EditorUtility.SetDirty(dataAsset);
-                    // Exit the loop to avoid errors due to the modified list.
-                    break;
+                    deletionIndex = i;
                 }
             }
             EditorGUILayout.EndHorizontal();
-            Level currentLevel = levels[i];
 
-            // Fields to set the sprites for this level.
-            currentLevel.questionSprite = (Sprite)EditorGUILayout.ObjectField("Question Sprite:", currentLevel.questionSprite, typeof(Sprite), false);
-            currentLevel.wrongAnswerSprite = (Sprite)EditorGUILayout.ObjectField("Wrong Answer Sprite:", currentLevel.wrongAnswerSprite, typeof(Sprite), false);
-
-            // Let the user define how many words are in this level.
-            int newWordCount = EditorGUILayout.IntField("Number of Words", currentLevel.wordCount);
-            if (newWordCount > 12)
+            // If this level is marked for deletion, skip drawing its details.
+            if (deletionIndex != i)
             {
-                EditorUtility.DisplayDialog("Warning", "Can't have more than 12 words in a level", "OK");
-                Debug.LogWarning("Warning: Can't have more than 12 words in a level. Setting count to 12.");
-                newWordCount = 12;
-            }
+                Level currentLevel = levels[i];
 
-            if (newWordCount != currentLevel.wordCount)
-            {
-                currentLevel.wordCount = newWordCount;
-                // Adjust the words list to match the new count.
-                if (newWordCount > currentLevel.words.Count)
+                // Fields to set the sprites for this level.
+                currentLevel.questionSprite = (Sprite)EditorGUILayout.ObjectField("Question Sprite:", currentLevel.questionSprite, typeof(Sprite), false);
+                currentLevel.wrongAnswerSprite = (Sprite)EditorGUILayout.ObjectField("Wrong Answer Sprite:", currentLevel.wrongAnswerSprite, typeof(Sprite), false);
+
+                // Let the user define how many words are in this level.
+                int newWordCount = EditorGUILayout.IntField("Number of Words", currentLevel.wordCount);
+                if (newWordCount > 12)
                 {
-                    while (newWordCount > currentLevel.words.Count)
-                    {
-                        currentLevel.words.Add("");
-                    }
+                    EditorUtility.DisplayDialog("Warning", "Can't have more than 12 words in a level", "OK");
+                    Debug.LogWarning("Warning: Can't have more than 12 words in a level. Setting count to 12.");
+                    newWordCount = 12;
                 }
-                else
-                {
-                    while (newWordCount < currentLevel.words.Count)
-                    {
-                        currentLevel.words.RemoveAt(currentLevel.words.Count - 1);
-                    }
-                }
-                EditorUtility.SetDirty(dataAsset);
-            }
 
-            // Create text fields for each word.
-            for (int j = 0; j < currentLevel.words.Count; j++)
-            {
-                currentLevel.words[j] = EditorGUILayout.TextField("Word " + (j + 1), currentLevel.words[j]);
+                if (newWordCount != currentLevel.wordCount)
+                {
+                    currentLevel.wordCount = newWordCount;
+                    // Adjust the words list to match the new count.
+                    if (newWordCount > currentLevel.words.Count)
+                    {
+                        while (newWordCount > currentLevel.words.Count)
+                        {
+                            currentLevel.words.Add("");
+                        }
+                    }
+                    else
+                    {
+                        while (newWordCount < currentLevel.words.Count)
+                        {
+                            currentLevel.words.RemoveAt(currentLevel.words.Count - 1);
+                        }
+                    }
+                    EditorUtility.SetDirty(dataAsset);
+                }
+
+                // Create text fields for each word.
+                for (int j = 0; j < currentLevel.words.Count; j++)
+                {
+                    currentLevel.words[j] = EditorGUILayout.TextField("Word " + (j + 1), currentLevel.words[j]);
+                }
             }
 
             EditorGUILayout.EndVertical();
             EditorGUILayout.Space();
         }
         EditorGUILayout.EndScrollView();
+
+        // After closing all layout groups, remove the marked level (if any).
+        if (deletionIndex != -1)
+        {
+            levels.RemoveAt(deletionIndex);
+            EditorUtility.SetDirty(dataAsset);
+        }
 
         // Mark the asset dirty if any changes occurred.
         if (GUI.changed)

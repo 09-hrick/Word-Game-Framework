@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a822ef4832018742878980146a667eb, type: 3}
+  m_Name: Rename to Data to use this Sample Resouce Data
+  m_EditorClassIdentifier: 
+  levels:
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 4
+    words:
+    - 'Begin '
+    - 'Your '
+    - Journey
+    - Now
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 4
+    words:
+    - 'Venture '
+    - 'Into '
+    - 'Unknown '
+    - Lands
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 6
+    words:
+    - 'Discover '
+    - 'Hidden '
+    - 'Secrets '
+    - 'Along '
+    - 'The '
+    - Way
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 5
+    words:
+    - 'Unite '
+    - 'With '
+    - 'Friends '
+    - 'For '
+    - Strength
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 12
+    words:
+    - 'Advance '
+    - 'With '
+    - 'Steadfast '
+    - Confidence,
+    - 'Let '
+    - 'Unyielding '
+    - 'Determination '
+    - 'Drive '
+    - 'You '
+    - 'Toward '
+    - 'Success '
+    - Daily
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 5
+    words:
+    - 'Push '
+    - 'Forward '
+    - 'Despite '
+    - 'All '
+    - Odds
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 3
+    words:
+    - Explore
+    - 'Your '
+    - Potential
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 9
+    words:
+    - 'The '
+    - 'Quick '
+    - 'Brown '
+    - 'Fox '
+    - 'Jumps '
+    - 'Over '
+    - 'The '
+    - 'Lazy '
+    - Dog
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 12
+    words:
+    - 'Persist '
+    - 'Through '
+    - 'Tough '
+    - Hardship,
+    - 'Maintain '
+    - 'Strong '
+    - 'Faith '
+    - 'And '
+    - 'Conquer '
+    - 'Every '
+    - 'Obstacle '
+    - Ahead
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 6
+    words:
+    - 'Celebrate '
+    - 'Success '
+    - 'And '
+    - Embrace
+    - 'Future '
+    - Dreams
+  currentLevelIndex: 4
