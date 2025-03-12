@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 74714be466eb94d4e91ea8aafc25884c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - optionPrefab: {fileID: 432289194396813448, guid: 6c34f53aeed44db4aa5a653caabf5e14, type: 3}
+  - optionContainer: {instanceID: 0}
+  - questionImage: {instanceID: 0}
+  - CurrentLevel: {instanceID: 0}
+  - lastLevel: {instanceID: 0}
+  - progressBar: {instanceID: 0}
+  - textWarning: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

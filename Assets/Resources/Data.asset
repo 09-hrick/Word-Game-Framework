@@ -15,67 +15,108 @@ MonoBehaviour:
   levels:
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 5
+    wordCount: 4
     words:
-    - The
-    - Man
-    - Sleeps
-    - All
-    - Day
+    - 'Begin '
+    - 'Your '
+    - Journey
+    - Now
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 1
+    wordCount: 4
     words:
-    - Run!
+    - 'Venture '
+    - 'Into '
+    - 'Unknown '
+    - Lands
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 6
+    words:
+    - 'Discover '
+    - 'Hidden '
+    - 'Secrets '
+    - 'Along '
+    - 'The '
+    - Way
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 5
+    words:
+    - 'Unite '
+    - 'With '
+    - 'Friends '
+    - 'For '
+    - Strength
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 12
+    words:
+    - 'Advance '
+    - 'With '
+    - 'Steadfast '
+    - Confidence,
+    - 'Let '
+    - 'Unyielding '
+    - 'Determination '
+    - 'Drive '
+    - 'You '
+    - 'Toward '
+    - 'Success '
+    - Daily
+  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
+    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
+    wordCount: 5
+    words:
+    - 'Push '
+    - 'Forward '
+    - 'Despite '
+    - 'All '
+    - Odds
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
     wordCount: 3
     words:
-    - She
-    - Loves
-    - Reading
+    - Explore
+    - 'Your '
+    - Potential
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 4
+    wordCount: 9
     words:
-    - They
-    - Played
-    - Soccer
-    - Outside
+    - 'The '
+    - 'Quick '
+    - 'Brown '
+    - 'Fox '
+    - 'Jumps '
+    - 'Over '
+    - 'The '
+    - 'Lazy '
+    - Dog
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 1
+    wordCount: 12
     words:
-    - Quickly!
+    - 'Persist '
+    - 'Through '
+    - 'Tough '
+    - Hardship,
+    - 'Maintain '
+    - 'Strong '
+    - 'Faith '
+    - 'And '
+    - 'Conquer '
+    - 'Every '
+    - 'Obstacle '
+    - Ahead
   - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
     wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 4
+    wordCount: 6
     words:
-    - The
-    - Sun
-    - Sets
-    - Fast
-  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
-    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 4
-    words:
-    - He
-    - Always
-    - Forgets
-    - Keys
-  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
-    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 5
-    words:
-    - Run
-    - Fast
-    - Run
-    - For
-    - Safety
-  - questionSprite: {fileID: -4083966880802778809, guid: caa9375918a78e7419607800280946e1, type: 3}
-    wrongAnswerSprite: {fileID: 750766408279468725, guid: b9e0656b3e3ae384cbba1fa4e9337674, type: 3}
-    wordCount: 2
-    words:
-    - Birds
-    - Fly
+    - 'Celebrate '
+    - 'Success '
+    - 'And '
+    - Embrace
+    - 'Future '
+    - Dreams
   currentLevelIndex: 0

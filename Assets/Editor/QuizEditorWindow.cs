@@ -107,11 +107,11 @@ public class QuizEditorWindow : EditorWindow
 
             // Let the user define how many words are in this level.
             int newWordCount = EditorGUILayout.IntField("Number of Words", currentLevel.wordCount);
-            if (newWordCount > 5)
+            if (newWordCount > 12)
             {
-                EditorUtility.DisplayDialog("Warning", "Can't have more than 5 words in a level", "OK");
-                Debug.LogWarning("Warning: Can't have more than 5 words in a level. Setting count to 5.");
-                newWordCount = 5;
+                EditorUtility.DisplayDialog("Warning", "Can't have more than 12 words in a level", "OK");
+                Debug.LogWarning("Warning: Can't have more than 12 words in a level. Setting count to 12.");
+                newWordCount = 12;
             }
 
             if (newWordCount != currentLevel.wordCount)
